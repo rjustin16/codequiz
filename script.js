@@ -12,23 +12,23 @@ const questions = [
         correctIndex: 0,
     },
     {
-        text: "is the sky blue",
-        answers: ["true", "false"],
+        text: "are dogs the best?",
+        answers: ["no", "yes"],
         correctIndex: 1,
     },
     {
-        text: "is the sky blue",
-        answers: ["true", "false"],
+        text: "what color is the sun?",
+        answers: ["green", "yellow"],
         correctIndex: 0,
     },
     {
-        text: "is the sky blue",
-        answers: ["true", "false"],
+        text: "do you like burritos?",
+        answers: ["no", "yes"],
         correctIndex: 1,
     },
     {
-        text: "is the sky blue",
-        answers: ["true", "false"],
+        text: "when is my bday?",
+        answers: ["oct", "nov"],
         correctIndex: 0,
     },
 ];
@@ -36,11 +36,16 @@ let questionIndex = 0;
 
 
 
-startBtn.addEventListener("click", function(e){
+startBtn.addEventListener("click", handleStartClick)
+
+
+function handleStartClick(e){
 
 startPrompt.style.display = "none";
 questionContainer.style.display = "block";
 
+renderQuestion();
+}
 const currentQuestion = questions[questionIndex]
 questionText.textContent = currentQuestion.text;
 for (let i= 0; i < currentQuestion.answers.length; i++){
@@ -48,24 +53,38 @@ for (let i= 0; i < currentQuestion.answers.length; i++){
     const btn = document.createElement("button");
     btn.setAttribute("class", "btn btn-primary");
     btn.textContent = answer;
-    answersDiv.appendChild(btn);
+    answersDiv.appendChild(btn)
 
-}
-});
+};
 
-answersDiv.addEventListener('click', function(e){
+answersDiv.addEventListener('click', handleAnswer)
+
+
+function handleAnswer(e){
     e.preventDefault();
 
     if (!e.target.matches('button'))return;
     const userAnswer = e.target.textContent;
-    const question = question[questionIndex];
+    const question = questions[questionIndex];
     const correctAnswer = question.answers[question.correctIndex];
     if(userAnswer === correctAnswer){
         console.log("that was right")
     }else{
         console.log('that was wrong')
     }
+    questionIndex++;
+    renderQuestion();
+};
 
-
-    console.log(e.target);
-});
+function renderQuestion() {
+    const currentQuestion = questions[questionIndex]
+questionText.textContent = currentQuestion.text;
+answersDiv.innerHTML = "";
+for (let i= 0; i < currentQuestion.answers.length; i++){
+    const answer = currentQuestion.answers[i];
+    const btn = document.createElement("button");
+    btn.setAttribute("class", "btn btn-primary");
+    btn.textContent = answer;
+    answersDiv.appendChild(btn)
+}
+};
