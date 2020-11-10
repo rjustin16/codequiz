@@ -68,26 +68,6 @@ function handleStartClick(e) {
   renderQuestion();
 }
 
-// display the question in array
-const currentQuestion = questions[questionIndex];
-// display question text
-questionText.textContent = currentQuestion.text;
-// loop the questions array
-for (let i = 0; i < currentQuestion.answers.length; i++) {
-    // variable for the answer options
-  const answer = currentQuestion.answers[i];
-//   create button for answers
-  const btn = document.createElement("button");
-//   style answer buttons
-  btn.setAttribute("class", "btn btn-primary", "style", "margin:10px");
-//   fill button with answer options
-  btn.textContent = answer;
-//   add buttons to answer div
-  answersDiv.appendChild(btn);
-}
-
-
-
 // what to do when an answer is inputed
 function handleAnswer(e) {
     // stop page reload
