@@ -74,25 +74,16 @@ function handleAnswer(e) {
   e.preventDefault();
 //   hide score display
   scoreContainer.style.display = "none";
-  if (!e.target.matches("button")) return;
-//   set answer of user equal to the button selected
-  const userAnswer = e.target.textContent;
-//   question array
-  const question = questions[questionIndex];
-//   the correct anser
-  const correctAnswer = question.answers[question.correctIndex];
-  // if(userAnswer === correctAnswer){
-  //     console.log("that was right")
-  // }else{
-  //     console.log('that was wrong')
-  // }
-  if (userAnswer === correctAnswer) {
-    //  add one to the user score
-    userScore++;
-    console.log("that was correct");
-  } else {
-    console.log("that was wrong");
-    secondsLeft = secondsLeft - 10;
+  if (e.target.textContent !== questions[questionIndex].answer){
+    
+        console.log("that was wrong");
+        secondsLeft = secondsLeft - 10;
+      
+  }
+  else {
+      userScore++;
+      console.log("that was correct");
+     
   }
   questionIndex++;
 
@@ -106,7 +97,7 @@ function handleAnswer(e) {
 
 // how to get to the next question
 function renderQuestion() {
-  const currentQuestion = questions[questionIndex];
+  let currentQuestion = questions[questionIndex];
   questionText.textContent = currentQuestion.text;
   answersDiv.innerHTML = "";
   for (let i = 0; i < currentQuestion.answers.length; i++) {
