@@ -41,7 +41,7 @@ let questionIndex = 0;
 // event listeners on the buttons
 startBtn.addEventListener("click", handleStartClick);
 answersDiv.addEventListener("click", handleAnswer);
-scoreEL.addEventListener("click", handleStartClick)
+scoreEL.addEventListener("click", renderQuestion)
 
 
 // start the quiz
@@ -49,6 +49,7 @@ function handleStartClick(e) {
 
     // hide the start quiz display
   startPrompt.style.display = "none";
+//   timer for the quiz
   var timerInterval = setInterval(function () {
     secondsLeft--;
     timeEl.textContent = secondsLeft;
@@ -77,8 +78,11 @@ for (let i = 0; i < currentQuestion.answers.length; i++) {
   const answer = currentQuestion.answers[i];
 //   create button for answers
   const btn = document.createElement("button");
+//   style answer buttons
   btn.setAttribute("class", "btn btn-primary", "style", "margin:10px");
+//   fill button with answer options
   btn.textContent = answer;
+//   add buttons to answer div
   answersDiv.appendChild(btn);
 }
 
@@ -86,11 +90,16 @@ for (let i = 0; i < currentQuestion.answers.length; i++) {
 
 // what to do when an answer is inputed
 function handleAnswer(e) {
+    // stop page reload
   e.preventDefault();
+//   hide score display
   scoreContainer.style.display = "none";
   if (!e.target.matches("button")) return;
+//   set answer of user equal to the button selected
   const userAnswer = e.target.textContent;
+//   question array
   const question = questions[questionIndex];
+//   the correct anser
   const correctAnswer = question.answers[question.correctIndex];
   // if(userAnswer === correctAnswer){
   //     console.log("that was right")
@@ -98,7 +107,7 @@ function handleAnswer(e) {
   //     console.log('that was wrong')
   // }
   if (userAnswer === correctAnswer) {
-    //    score = (score + 1 + secondsLeft)
+    //  add one to the user score
     userScore++;
     console.log("that was correct");
   } else {
@@ -111,6 +120,7 @@ function handleAnswer(e) {
     renderQuestion();
   } else {
     renderResults();
+    secondsLeft = 0;
   }
 }
 
@@ -142,7 +152,7 @@ function renderResults() {
   score = secondsLeft + userScore
   scoreEL.innerHTML = " ";
   scoreEL.textContent = ("Your score was " + score);
-    myStopFunction();
+    // myStopFunction();
     const btn = document.createElement("button");
     btn.setAttribute("class", "btn btn-primary", "style", "margin:10px", "justify-content:center");
     btn.textContent = "play again?";
