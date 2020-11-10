@@ -7,6 +7,7 @@ const timeEl = document.querySelector("#time");
 const scoreEL = document.querySelector("#score");
 const scoreContainer = document.querySelector("#scorecontainer");
 
+// questions for the quiz
 const questions = [
   {
     text: "what color is the sky?",
@@ -36,31 +37,57 @@ const questions = [
 ];
 let questionIndex = 0;
 
+
+// event listeners on the buttons
 startBtn.addEventListener("click", handleStartClick);
+answersDiv.addEventListener("click", handleAnswer);
+scoreEL.addEventListener("click", handleStartClick)
+
 
 // start the quiz
 function handleStartClick(e) {
+
+    // hide the start quiz display
   startPrompt.style.display = "none";
+  var timerInterval = setInterval(function () {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft;
+
+    if (secondsLeft <= 0) {
+      clearInterval(timerInterval);
+      alert("the quiz is over");
+    } 
+
+  }, 1000);
+//   show the question display
   questionContainer.style.display = "block";
-  setTime();
+//   start the timer
+//   setTime();
+//   render next quesiton
   renderQuestion();
 }
+
+// display the question in array
 const currentQuestion = questions[questionIndex];
+// display question text
 questionText.textContent = currentQuestion.text;
+// loop the questions array
 for (let i = 0; i < currentQuestion.answers.length; i++) {
+    // variable for the answer options
   const answer = currentQuestion.answers[i];
+//   create button for answers
   const btn = document.createElement("button");
   btn.setAttribute("class", "btn btn-primary", "style", "margin:10px");
   btn.textContent = answer;
   answersDiv.appendChild(btn);
 }
 
-answersDiv.addEventListener("click", handleAnswer);
+
 
 // what to do when an answer is inputed
 function handleAnswer(e) {
   e.preventDefault();
-
+  scoreContainer.style.display = "none";
   if (!e.target.matches("button")) return;
   const userAnswer = e.target.textContent;
   const question = questions[questionIndex];
@@ -108,7 +135,7 @@ var score = 0;
 // results of the quiz
 function renderResults() {
   const results = document.createElement('p');
-//   results.setAttribute("class", "btn btn-primary", "style", "margin:10px");
+  results.setAttribute("class", "btn btn-primary", "style", "margin:10px");
   results.textContent = score;
   scoreContainer.style.display = "block";
   questionContainer.style.display = "none";
@@ -125,24 +152,19 @@ function renderResults() {
 // the timer for the quiz
 var secondsLeft = 75;
 
-function setTime() {
-  var timerInterval = setInterval(function () {
-    secondsLeft--;
-    timeEl.textContent = secondsLeft;
+// function setTime() {
+//   var timerInterval = setInterval(function () {
+//     secondsLeft--;
+//     timeEl.textContent = secondsLeft;
 
-    if (secondsLeft === 0) {
-      clearInterval(timerInterval);
-      alert("the quiz is over");
-    } else if (questionIndex < questions.length){
-        
-    }
-    else {
+//     if (secondsLeft <= 0) {
+//       clearInterval(timerInterval);
+//       alert("the quiz is over");
+//     } 
 
-    }
+//   }, 1000);
 
-  }, 1000);
-}
-function myStopFunction() {
-    clearInterval(secondsLeft);
-}
+// function myStopFunction() {
+//     clearInterval(secondsLeft);
+// }
 // scoreEL.textContent = ("You got " + score + "/" + secondsLeft.length);
