@@ -114,11 +114,12 @@ function renderResults() {
   questionContainer.style.display = "none";
   score = secondsLeft + userScore
   scoreEL.innerHTML = " ";
-  scoreEL.textContent = ("Your score was " + score + '!');
-  myStopFunction();
-//   const btn = document.createElement("button");
-//     btn.setAttribute("class", "btn btn-primary", "style", "margin:10px");
-//     btn.textContent = "play again?";
+  scoreEL.textContent = ("Your score was " + score);
+    myStopFunction();
+    const btn = document.createElement("button");
+    btn.setAttribute("class", "btn btn-primary", "style", "margin:10px", "justify-content:center");
+    btn.textContent = "play again?";
+    scoreEL.appendChild(btn);
 }
 
 // the timer for the quiz
