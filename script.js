@@ -75,10 +75,8 @@ function handleAnswer(e) {
 //   hide score display
   scoreContainer.style.display = "none";
   if (e.target.textContent !== questions[questionIndex].answer){
-    
         console.log("that was wrong");
         secondsLeft = secondsLeft - 10;
-      
   }
   else {
       userScore++;
@@ -91,7 +89,7 @@ function handleAnswer(e) {
     renderQuestion();
   } else {
     renderResults();
-    secondsLeft = 0;
+    secondsLeft = 1;
   }
 }
 
