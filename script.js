@@ -10,9 +10,9 @@ const scoreContainer = document.querySelector("#scorecontainer");
 // questions for the quiz
 const questions = [
   {
-    text: "what color is the sky?",
-    answers: ["blue", "green", "red", "yellow"],
-    correctIndex: 0,
+    text: "This is ",
+    answers: ["sparta", "us", "the end", "the way"],
+    correctIndex: 3,
   },
   {
     text: "what dogs are the best?",
