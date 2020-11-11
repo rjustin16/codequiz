@@ -41,7 +41,7 @@ let questionIndex = 0;
 // event listeners on the buttons
 startBtn.addEventListener("click", handleStartClick);
 answersDiv.addEventListener("click", handleAnswer);
-scoreEL.addEventListener("click", renderQuestion)
+scoreEL.addEventListener("click", reloadpage)
 
 
 // start the quiz
@@ -127,7 +127,6 @@ function renderResults() {
   score = secondsLeft + userScore
   scoreEL.innerHTML = " ";
   scoreEL.textContent = ("Your score was " + score);
-    // myStopFunction();
     const btn = document.createElement("button");
     btn.setAttribute("class", "btn btn-primary", "style", "margin:10px", "justify-content:center");
     btn.textContent = "play again?";
@@ -137,19 +136,6 @@ function renderResults() {
 // the timer for the quiz
 var secondsLeft = 75;
 
-// function setTime() {
-//   var timerInterval = setInterval(function () {
-//     secondsLeft--;
-//     timeEl.textContent = secondsLeft;
-
-//     if (secondsLeft <= 0) {
-//       clearInterval(timerInterval);
-//       alert("the quiz is over");
-//     } 
-
-//   }, 1000);
-
-// function myStopFunction() {
-//     clearInterval(secondsLeft);
-// }
-// scoreEL.textContent = ("You got " + score + "/" + secondsLeft.length);
+function reloadpage(){
+    location.reload()
+}
