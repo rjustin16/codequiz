@@ -56,7 +56,7 @@ function handleStartClick(e) {
 
     if (secondsLeft <= 0) {
       clearInterval(timerInterval);
-      alert("the quiz is over");
+    //   prompt("the quiz is over");
     } 
 
   }, 1000);
